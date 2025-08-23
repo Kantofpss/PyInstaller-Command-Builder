@@ -1,5 +1,5 @@
-#PyInstaller Command Builder
-##Overview
+# PyInstaller Command Builder
+## Overview
 
 This project is a web-based tool designed to simplify the process of generating PyInstaller commands for compiling Python scripts into executable files. Instead of manually writing complex PyInstaller commands in the terminal, this tool provides an intuitive interface where users can select their Python script, configure options, and generate a ready-to-use command with a single click.
 
@@ -23,7 +23,7 @@ Version File Template: Download a sample version file template for PyInstaller.
 
 Generated Command Output: View and copy the complete PyInstaller command to your clipboard.
 
-##How to Use
+## How to Use
 
 Open index.html in a web browser.
 
@@ -41,7 +41,7 @@ Click Generate Command to create the PyInstaller command.
 
 Copy the generated command from the output area and run it in your terminal where PyInstaller is installed.
 
-##Files
+## Files
 
 index.html: The main HTML file containing the form and structure.
 
@@ -49,7 +49,7 @@ style.css: Stylesheet for the web interface, using a dark theme with responsive 
 
 script.js: JavaScript logic for handling form inputs, generating commands, and managing dynamic fields.
 
-##Notes
+## Notes
 
 This tool assumes you have PyInstaller installed in your environment.
 
@@ -57,6 +57,6 @@ The interface is designed to be user-friendly, especially for those new to progr
 
 As a beginner project, there may be areas for improvement—feedback is welcome!
 
-Author
+## Author
 
 Created by Kantofpss, a new programmer passionate about creating tools to simplify development tasks.
