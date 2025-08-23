@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- DOM Element References ---
+    
     const form = document.getElementById('pyinstaller-form');
     const outputArea = document.getElementById('output-area');
     const outputLog = document.getElementById('output-log');
     const copyBtn = document.getElementById('copy-btn');
 
-    // Main script, icon, and version file inputs
+    
     const scriptFileInput = document.getElementById('script-file');
     const scriptFileName = document.getElementById('script-file-name');
     const iconFileInput = document.getElementById('icon-file');
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const versionFileName = document.getElementById('version-file-name');
     const downloadVersionTemplateBtn = document.getElementById('download-version-template');
 
-    // General options
+    
     const appNameInput = document.getElementById('app-name');
     const onefileCheckbox = document.getElementById('onefile');
     const noconsoleCheckbox = document.getElementById('noconsole');
@@ -45,11 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         label: 'Select Data'
     };
 
-    /**
-     * Updates the file name display for a file input.
-     * @param {HTMLInputElement} inputElement The file input element.
-     * @param {HTMLElement} nameElement The span element to display the name.
-     */
     function updateFileName(inputElement, nameElement) {
         if (inputElement.files.length > 0) {
             nameElement.textContent = inputElement.files[0].name;
@@ -60,20 +55,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * Toggles the visibility of a collapsible dropdown section.
-     * @param {HTMLElement} container The container element to toggle.
-     * @param {HTMLElement} button The button that controls the toggle.
-     */
+    
     function toggleDropdown(container, button) {
         container.classList.toggle('open');
         button.classList.toggle('open');
     }
 
-    /**
-     * Creates a set of dynamic file input fields based on a configuration object.
-     * @param {object} config Configuration for the dynamic fields.
-     */
+    
     function createDynamicFields(config) {
         config.container.innerHTML = '';
         let numFields = parseInt(config.numInput.value, 10);
@@ -110,10 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * Handles the form submission to generate the PyInstaller command.
-     * @param {Event} event The form submission event.
-     */
+    
     function handleFormSubmit(event) {
         event.preventDefault();
         
@@ -128,14 +113,11 @@ document.addEventListener('DOMContentLoaded', () => {
         outputArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    /**
-     * Assembles the PyInstaller command string from form inputs.
-     * @returns {string} The generated command.
-     */
+    
     function buildCommand() {
         const commandParts = ['pyinstaller'];
         
-        // Basic options
+        
         if (cleanCheckbox.checked) commandParts.push('--clean');
         if (noconsoleCheckbox.checked) commandParts.push('--noconsole');
         if (onefileCheckbox.checked) commandParts.push('--onefile');
@@ -143,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const appName = appNameInput.value.trim();
         if (appName) commandParts.push(`--name "${appName}"`);
 
-        // File-based options
+        
         if (iconFileInput.files[0]) commandParts.push(`--icon "${iconFileInput.files[0].name}"`);
         if (versionFileInput.files[0]) commandParts.push(`--version-file "${versionFileInput.files[0].name}"`);
 
@@ -156,27 +138,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 .forEach(imp => commandParts.push(`--hidden-import ${imp}`));
         }
         
-        // Log level
+        
         if (logLevelSelect.value !== 'INFO') {
             commandParts.push(`--log-level ${logLevelSelect.value}`);
         }
         
-        // Add-binary and Add-data
+        
         appendDynamicFileArgs(commandParts, binaryConfig, '--add-binary');
         appendDynamicFileArgs(commandParts, dataConfig, '--add-data');
         
-        // Main script
+        
         commandParts.push(`"${scriptFileInput.files[0].name}"`);
         
         return commandParts.join(' ');
     }
     
-    /**
-     * Appends arguments for dynamic file inputs (--add-binary, --add-data) to the command.
-     * @param {string[]} commandParts The array of command parts.
-     * @param {object} config The configuration object for the dynamic section.
-     * @param {string} flag The command-line flag (e.g., '--add-binary').
-     */
+    
     function appendDynamicFileArgs(commandParts, config, flag) {
         const numFields = parseInt(config.numInput.value, 10);
         for (let i = 1; i <= numFields; i++) {
@@ -188,9 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * Copies the generated command to the clipboard.
-     */
+    
     function copyCommandToClipboard() {
         if (!outputLog.textContent || outputLog.textContent.startsWith('Fill out')) return;
         
@@ -210,10 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /**
-     * Creates and triggers a download for a version info file template.
-     * @param {Event} event The click event.
-     */
+    
     function downloadVersionTemplate(event) {
         event.preventDefault();
         const templateContent = `# UTF-8
@@ -258,9 +230,7 @@ VSVersionInfo(
         URL.revokeObjectURL(link.href);
     }
 
-    /**
-     * Initializes the application by setting up event listeners and creating initial fields.
-     */
+    
     function initialize() {
         scriptFileInput.addEventListener('change', () => updateFileName(scriptFileInput, scriptFileName));
         iconFileInput.addEventListener('change', () => updateFileName(iconFileInput, iconFileName));
@@ -282,4 +252,5 @@ VSVersionInfo(
 
     // --- Start the Application ---
     initialize();
+
 });
